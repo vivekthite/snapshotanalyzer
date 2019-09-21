@@ -6,10 +6,10 @@ python 3
 
 ## Running
 1) `pipenv install' #Note: This should be run only once after checkout
-2) `pipenv run python instances/instances.py <command> <--project <value of project tag>>`
-        <command> => start/stop/list
-        <--project> => is optional
-        Note: to get help try => `pipenv run python instances/instances.py --help`
+2) `pipenv run python instances/instances.py <COMMAND> <OPTIONS>`
+            <br/>COMMAND : start/stop/list
+            <br/>OPTIONS : --project (it is optional)
+        <br/><p>Note: to get help try => `pipenv run python instances/instances.py --help`
                                   or  `pipenv run python instances/instances.py <command> --help`
 
          e.g.
@@ -51,4 +51,3 @@ python 3
 
             ================================================
 
-            
