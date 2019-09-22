@@ -105,10 +105,23 @@ def create_snapshots(project):
     i_list = filter_instances(project)
 
     for i in i_list:
+        print("Stopping {0}...".format(i.id))
+        i.stop()
+        i.wait_until_stopped()
         for v in i.volumes.all():
-            print("Creating snapshot for {0}-{1}".format(i.id,v.id))
-            v.create_snapshot(Description="Created by snapshotanalyzer")
-
+            print("Creating snapshot for {0}... : {1}".format(i.id, v.id))
+            snap = v.create_snapshot(Description="Created by snapshotanalyzer")
+            """
+                No need to wait to complete the snapshot. u can immediately
+                return and start the instance. It is safe and best practice.
+            """
+            # snap.wait_until_completed()
+            # snap.load()
+            # print("Snapshot of {0} : {1} is {2}".format(i.id, v.id, snap.state))
+        print("Starting {0}...".format(i.id))
+        i.start()
+        i.wait_until_running()
+        print("Snapshot Job Done. Hurray :) !")
     return
 
 
