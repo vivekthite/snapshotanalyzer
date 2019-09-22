@@ -90,7 +90,31 @@ export AWS_DEFAULT_REGION=<AWS_DEFAULT_REGION>
                     i-0d39a9250741f53e8 , t2.micro , us-east-1b , running , ec2-3-95-132-159.compute-1.amazonaws.com , prj1 
                 =====================================
                 
-                           
-                          
+## TODOs
+    1. Add the ability to “reboot” instances.
+    2. Add a “—force” flag to the “instances stop”, “start”, “snapshot”, and
+    “reboot” commands.
+        a. If “—project” isn’t set, exit the command immediately with an
+        error message, unless “—force” is set.
+    3. Add a “—profile” option to the “cli” group, which let’s you specify a
+    different profile.
+        e.g. “shotty —profile Kyle instances stop —force”
+    4. Use a try/except block to catch “botocore.exceptions.ClientError”
+        when creating snapshots, and print an error message.
+    5. Add an “instance” argument to the appropriate commands, so
+        they only target one instance.
+        e.g. “shotty volumes list —instance=i-0123456789abcdef”
+    6. After a snapshot, only start instances that were running before
+        the snapshot was taken.  
+    7. Add an optional “age” parameter to the “snapshot” command that
+        takes an age in days and only snapshots volumes whose last
+        successful snapshot is older than that many days.
+        e.g. “shotty instances snapshot —age 7 —project Valkyrie”
+    8. When snapshotting, don’t stop an instance unless the script will
+        snapshot one of its volumes.
+    9. Add a “region” parameter to all commands that will let the user
+        override the region set in their AWS CLI configuration profile.
+        e.g. “shotty —region us-east-1 instances list”                                 
+                              
                       
 
