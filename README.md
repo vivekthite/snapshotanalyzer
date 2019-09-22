@@ -4,7 +4,30 @@ Demo project in python to manage AWS EC2 instances snapshots
 ## Prerequisite
 python 3
 
-## Running
+## Environment variables to export
+export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+export AWS_DEFAULT_REGION=<AWS_DEFAULT_REGION>
+
+## Running - End User
+1) pipenv run python setup.py bdist_wheel
+2) ec2 --help
+
+    e.g. 
+        $ ec2 --help
+            Usage: ec2 [OPTIONS] COMMAND [ARGS]...
+            
+              ec2 snappy commands
+            
+            Options:
+              --help  Show this message and exit.
+            
+            Commands:
+              instances  Commands for instances
+              snapshots  Commands for volume's snapshots
+              volumes    Commands for instance's volumes
+ 
+## For DEV - Running
 1) `pipenv install' #Note: This should be run only once after checkout
 2) `pipenv run pipenv run python scripts/ec2.py <COMMAND> <SUBCOMMAND> <OPTIONS>`
             <br/>COMMAND : instances/volumes/snapshots
