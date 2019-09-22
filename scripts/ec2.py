@@ -74,6 +74,8 @@ def stop_instances(project):
         if i.state['Name'] == 'running':
             print("Stopping {0} ....".format(i.id))
             i.stop()
+        else:
+            print("Could not stop {0} as it's state is {1}".format(i.id, i.state['Name']))
 
     return
 
@@ -91,6 +93,8 @@ def start_instances(project):
         if i.state['Name'] == 'stopped':
             print("Starting {0} ....".format(i.id))
             i.start()
+        else:
+            print("Could not start {0} as it's state is {1}".format(i.id, i.state['Name']))
 
     return
 
