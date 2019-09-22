@@ -22,6 +22,11 @@ def filter_instances(project):
     return i_list
 
 
+def has_pending_snapshots(volume):
+    snaps = list(volume.snapshots.all())
+    return snaps and snaps[0].state == 'pending'
+
+
 @click.group()
 def cli():
     """ec2 snappy commands"""
@@ -113,6 +118,9 @@ def create_snapshots(project):
         i.stop()
         i.wait_until_stopped()
         for v in i.volumes.all():
+            if has_pending_snapshots(v):
+                print('Skipping {0} , snapshot is in progress'.format(v.id))
+                continue
             print("Creating snapshot for {0}... : {1}".format(i.id, v.id))
             snap = v.create_snapshot(Description="Created by snapshotanalyzer")
             """
