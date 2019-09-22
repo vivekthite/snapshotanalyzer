@@ -160,7 +160,8 @@ def list_volumes(project):
 @click.option('--project', default=None,
               help="project tag value of intended ec2 instance e.g. --project prj1. if not provided lists all "
                    "snapshots of all volumes of the all instances")
-def list_snapshots(project):
+@click.option('--all','list_all',default=False,is_flag=True,help='lists all snapshots')
+def list_snapshots(project,list_all):
     """list the snapshots of volumes of intended instances"""
 
     i_list = filter_instances(project)
@@ -180,6 +181,9 @@ def list_snapshots(project):
                         , str(s.volume_size) + " GiB"
                     )
                 ))
+                # snapshots are returned in most recent first
+                # show only most recent completed snapshots.
+                if s.state == 'completed' and not list_all: break
 
     return
 
